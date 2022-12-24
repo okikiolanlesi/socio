@@ -1,0 +1,16 @@
+extends baseEmail 
+block content
+    p= `Hi ${firstName},`
+    p Welcome to Socio, we're glad to have you 🎉🙏
+    p We're all a big family here, so make sure you confirm your email address!
+    table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+        tbody
+        tr
+            td(align='left')
+            table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                tbody
+                tr
+                    td
+                    a(href=`${url}`, target='_blank') Confirm email
+    p If you need any help with using our services, please don't hesitate to contact me!
+    p - Okikiola Osunronbi, CEO
