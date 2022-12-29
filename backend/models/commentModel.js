@@ -10,6 +10,7 @@ const commentSchema = new mongoose.Schema(
     post: {
       type: mongoose.Schema.ObjectId,
       ref: "Post",
+      required: [true, "comments must belong to a post"],
     },
     comment: {
       type: String,
@@ -22,6 +23,10 @@ const commentSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+commentSchema.pre(/^find/, function (next) {
+  this.populate({ path: "user", select: "name photo" });
+});
 
 const Comment = mongoose.model("comment", commentSchema);
 

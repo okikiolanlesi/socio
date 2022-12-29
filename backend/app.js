@@ -6,6 +6,7 @@ const rateLimit = require("express-rate-limit");
 const compression = require("compression");
 const AppError = require("./utils/AppError");
 const morgan = require("morgan");
+const postRouter = require("./routes/postRoutes.js");
 // const catchAsync = require("./utils/catchAsync");
 const globalErrorHandler = require("./controllers/errorController");
 
@@ -47,6 +48,7 @@ app.use("/api", limiter);
 app.use(compression());
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/posts", postRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));

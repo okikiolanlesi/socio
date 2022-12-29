@@ -57,6 +57,17 @@ postSchema.pre(/^find/, function (next) {
   next();
 });
 
+postSchema.virtual("comments", {
+  ref: "Comment",
+  foreignField: "post",
+  localField: "_id",
+});
+
+postSchema.virtual("saves", {
+  ref: "Save",
+  foreignField: "post",
+  localField: "_id",
+});
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;

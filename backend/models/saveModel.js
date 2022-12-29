@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const save = new mongoose.Schema(
+const saveSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.ObjectId,
@@ -19,6 +19,14 @@ const save = new mongoose.Schema(
   }
 );
 
-const Save = mongoose.model("Save", save);
+saveSchema.pre(/^find/, function (next) {
+  this.populate({ path: "user", select: "name photo" }).populate({
+    path: "post",
+    select: "title about image destination category",
+  });
+  next();
+});
+
+const Save = mongoose.model("Save", saveSchema);
 
 module.exports = Save;
